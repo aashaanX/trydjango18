@@ -1,0 +1,30 @@
+<!--{% load staticfiles %}-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'head.css' %}
+
+  <body>
+
+   {% include 'navbar.html' %}
+
+    <div class="container">
+         {% block jumbotron %}
+      this is a test
+         {% endblock %}
+      {% block content %}
+      {% endblock %}
+
+
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    {% include 'javascript.html' %}
+
+  </body>
+</html>
