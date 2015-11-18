@@ -6,11 +6,13 @@ from django.shortcuts import render
 
 from .forms import ContactForm,SignUpForm
 
+from .models import SignUp
+
 
 # Create your views here.
 
 def home(request):
-    title = 'Welcome '
+    title = 'Sign Up Now'
     # if request.user.is_authenticated():
     #     title= title+str(request.user)
     # if request.method == "POST":
@@ -31,9 +33,19 @@ def home(request):
             "title":title
         }
 
+    if request.user.is_authenticated() and request.user.is_staff:
+        # print(SignUp.objects.all())
+        # for instance in SignUp.objects.all():
+        #     print(instance,instance.full_name)
+        queryset =SignUp.objects.all().order_by("-timestamp")
+        context={
+            "queryset":queryset
+        }
+
     return render(request,"home.html",context)
 
 def contact(request):
+    title='Contact Us'
     form=ContactForm(request.POST or None)
     if form.is_valid():
         # for key,value in form.cleaned_data.items():
@@ -54,6 +66,7 @@ def contact(request):
                   to_email,fail_silently=False)
     context={
         "form":form,
+        "title":title
     }
     return render(request,"forms.html",context)
 

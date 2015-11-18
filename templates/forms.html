@@ -1,8 +1,23 @@
-<form method="POST" action="" >{% csrf_token %}
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% if title %}
+<div calss="row">
+  <div class="col-sm-12 col-sm-offset-3">
+    <h1>{{title}}</h1>
+  </div>
+</div>
+{% endif %}
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    <form method="POST" action="" >{% csrf_token %}
     <!--<input>-->
     <!--<input>-->
-    {{form.as_p}}
-    <input type="submit" value="Submit">
-
-
+    {{form|crispy}}
+    <input  class = 'btn btn-default' type="submit" value="Submit">
 </form>
+  </div>
+</div>
+{% endblock %}
